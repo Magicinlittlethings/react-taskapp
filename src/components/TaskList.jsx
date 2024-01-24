@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
   
   export default function TaskList({ openForm, onTaskListClick, taskLists, handleDeleteTaskList }){
@@ -16,7 +16,7 @@ import axios from 'axios';
   
     return (
     <div className=' py-6 border-r-2 border-slate-300 col-span-1 px-1'>
-      <h2 className='px-2 text-violet-700 text-2xl font-bold mb-4'>Task progress</h2>
+      <h2 className='px-2 text-violet-700 text-2xl font-bold mb-4'>Task List</h2>
       <ul>
         {taskLists.map((taskList) => (
           <li key={taskList.id} onClick={() => onTaskListClick(taskList)} className='flex justify-between py-1.5 cursor-pointer hover:border-2 hover:rounded-md hover:border-slate-950 px-2' >

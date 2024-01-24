@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function Tasks({ selectedTaskList, openTaskForm }) {
   const tasks = selectedTaskList?.tasks || [];
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/task-lists/${selectedTaskList.id}/tasks`);
+      const response = await axios.get(`${backendUrl}/task-lists/${selectedTaskList.id}/tasks`);
       return response.data;
     } catch (error) {
       console.error('Error fetching tasks:', error);

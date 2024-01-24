@@ -4,6 +4,7 @@ import TaskForm from './components/TaskForm';
 import Tasks from './components/Tasks';
 import TaskListForm from './components/TaskListForm';
 import axios from 'axios';
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export default function App() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -15,7 +16,7 @@ export default function App() {
   useEffect(() => {
     const fetchTaskLists = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/task-lists');
+        const response = await axios.get(`${backendUrl}/task-lists`);
         setTaskLists(response.data);
       } catch (error) {
         console.error('Error fetching task lists:', error);
@@ -27,7 +28,7 @@ export default function App() {
 
   const handleDeleteTaskList = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:3001/task-lists/${taskId}`);
+      await axios.delete(`${backendUrl}/task-lists/${taskId}`);
       setTaskLists((prevTaskLists) => prevTaskLists.filter((taskList) => taskList.id !== taskId));
     } catch (error) {
       console.error('Error deleting task list:', error);
@@ -57,7 +58,7 @@ export default function App() {
 
   const updateTasks = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/task-lists/${taskListId}`);
+      const response = await axios.get(`${backendUrl}/task-lists/${taskListId}`);
       setSelectedTaskList(response.data);
     } catch (error) {
       console.error('Error fetching tasks:', error);
@@ -66,7 +67,7 @@ export default function App() {
 
   const updateTaskLists = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/task-lists');
+      const response = await axios.get(`${backendUrl}/task-lists`);
       setTaskLists(response.data);
     } catch (error) {
       console.error('Error fetching task lists:', error);
